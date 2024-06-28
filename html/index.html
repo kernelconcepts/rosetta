@@ -1,0 +1,208 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<meta NAME="Content-Language" CONTENT="en"> 
+<meta name="description" content="Rosetta project description">
+<meta name="keywords" content="Linux, Unix, handwriting, recognition, xmerlin, xstroke, stroke, multistroke, X11, X,  embedded development, GPE, input, method, PDA, keyboard">
+<meta name="author" content="Ole Reinhardt">
+<meta name="copyright" content="Ole Reinhardt, kernel concepts">
+<meta name="publisher" content="Ole Reinhardt, kernel concepts">
+<meta NAME="audience" CONTENT="all">
+<meta NAME="robots" CONTENT="INDEX,FOLLOW">
+<html><head>
+  <title>Rosetta - Multistroke / full word handwriting recognition for X</title></head>
+
+  <body>
+    <h1>Rosetta - Multistroke / full word handwriting recognition for X</h1>
+    <ul>
+      <li>
+	<a href="#description">Description</a>
+      </li>
+      <li>
+	<a href="#download">Download</a>
+      </li>
+      <li>
+        <a href="#compile">Compiling rosetta</a>
+      <li>
+      	<a href="#usage">Using rosetta</a>
+      </li>
+      <li>
+	<a href="#list">Mailing list</a>
+      </li>
+      <li>
+	<a href="#references">References</a>
+      </li>
+    </ul>
+    <hr>
+    <a name="description"><h2>Description</h2></a>
+    <p>
+      Rosetta is a new handwriting recognition engine for the X Window System. It supports multi stroke recognition and recognition for whole words / sentences. 
+      It captures characters written in a small window with a pointing device (mouse, tablet or pen), recognizes them and passes the relating keypress events to 
+      the actualy focused window.
+     <br>
+      You can write multi characters at once, but they may not be connected (like script). Single characters are recognized depending on the field you write in 
+      (lowercase, uppercase or special characters), multiple characters are recognizes as lower case characters .
+      </p><p>
+      Rosetta has been developed on Linux systems, (i386 and StrongARM), but should be quite portable to any reasonable system with X.
+    </p><p>
+      Rosetta is <a href="#freesw">free software</a> distributed under
+      the GNU General Public License, (<a href="#GPL">GPL</a>).
+    </p>
+    <p>
+      Many of the ideas that have gone into the development of Rosetta are derived from <a href="http://www.hellkvist.org/software/index.php3">xmerlin</a>, 
+      written by Stefan Hellkvist. To His Ideas I added the multi stroke support and some more classification functions, resulting in Rosetta.
+    </p>
+    <p>
+      Here are some screenshots:
+    </p>
+    <table>
+			<tr>
+			    <td>
+			       <img src="rosetta.png" width="240" height="320" border="0" hspace="20" vspace="0">
+			    </td>
+			    <td>
+			       <img src="trainer.png" width="240" height="320" border="0" hspace="20" vspace="0">
+			    </td>
+			</tr></table>    
+    <hr>
+    <a name="download"><h2>Download</h2></a>
+    <p>
+      There still is no final release of Rosetta, so please download the source from handhelds cvs by now.
+    </p>
+    <p>
+     In short, if you are not (yet?) a developer, you do the following to get an initial copy of the Rosetta sources:
+     <pre>
+        $ cd rosetta_cvs
+        $ export CVSROOT=:pserver:anoncvs@cvs.handhelds.org:/cvs
+        $ cvs login
+        Logging in to :pserver:anoncvs@cvs.handhelds.org:2401/cvs
+        CVS Password: anoncvs
+        $ cvs checkout rosetta
+     </pre>
+
+     You only have to do this once. The next time you want to update
+     your copy of the sources, do:
+     <pre>
+        $ cd rosetta_cvs
+        $ cvs update
+     </pre>
+     </p><p>
+       For a more detailed description about how to use handhelds.org CVS, please see
+       <a href="http://www.handhelds.org/handhelds-faq/development.html#USING-CVS">here</a>.
+     </p><p>
+       You can examine the CVS repository directly <a HREF="http://cvs.handhelds.org/cgi-bin/viewcvs.cgi/rosetta/">here</a>.
+     </p>
+     <p></p>
+     <hr>
+     <p>
+     <a name="compile"><h2>Compiling rosetta</h2></a>
+	To compile rosetta you will need X11 and a C compiler. for the rosetta learning application you'll also need GTK 2.x and the
+	GPE build framework (e.g. libgpewidget)
+	<p>
+	If you would like to compile rosetta, simply edit the Makefile to
+	point to correct locations for X and GPE and the type "make". (Yes, this is
+	a primitive build environment -- something fancy like autoconf perhaps will
+	come in a future release).
+	<p>
+	To install, simply type	"make install"
+     <hr>
+     <p>
+    <a name="usage"><h2>Using rosetta</h2></a>
+    </p><p>	
+	The rosetta package consists of two applications. rosetta itself and the
+	rosetta leaning application.
+	<p>
+	Running rosetta the first time will result in a long startup time. There
+	will be done some precalculations which will be saved in
+	<p>
+	<pre>
+	/usr/local/share/rosetta/rosetta.pc
+	</pre>
+	<p>
+	Rosetta will be installed together with a standard config file for german
+	and english characters. The config file is located in
+	<p>
+	<pre>
+	/etc/rosetta.conf
+	</pre>
+	<p>
+	Rosetta neets a database of known strokes. The one shipped with rosetta
+	contains my handwriting. You could create your own by starting the learning
+	application, klick on the "learn" button and then write character by
+	character all characters shown in the "Name" field. Every character can
+	contain of one or more strokes. After closing the
+	learning application your own database is saved.
+	<p>
+	The global database is located at:
+	<p><pre>
+	/usr/local/share/rosetta/rosetta.db
+	</pre><p>
+	The user database is located at:
+	<p><pre>
+	~/.rosetta/rosetta.db
+	</pre><p>
+	After starting rosetta itself you'll get a small input window. With
+	mbdesktop it will be integrated as new input method. The input window is
+	seperated into three fields.
+	<p>
+	Field "abc" is dedicated to lower case characters / numbers and some
+	interpunctation characters.
+	<br>
+	Field "ABC" is dedicated to upper case characters and also numbers and some
+	interpunctation characters.
+	<br>
+	Field "Symbol" is dedicated to all other characters and special function
+	keys (eg. cursor keys, function keys etc.)
+	<p>
+	If you write only one character the field you write in will be respected. If
+	you write more than one character all characters will be assumed to be lower
+	characters / numbers or some of the interpunctation characters (same as if
+	you wrote in "abc" field). All characters have to be seperated from each
+	other, so you may not write script but "printed characters".
+	<p>
+	If you write more than one word rosetta will try to find out the word
+	seperation.
+	<p>
+	The german "umlaute" (e.g. הצü) wont have their own representation in the
+	database. They will be matched by the number of "dots" you wrote on top of
+	the character. This is configurable in the config file.
+	<p>
+	In the learning application you can overwrite each character by hand or
+	learn the whole configured alphabet. To overwrite a single character simply
+	navigate to the character and then write the new one. To train the whole
+	alphabet navigate to the first alphabet and press the learn button. Now
+	write every character as shown in the "name" label. As configured in the
+	config file every character is repeatet several times in the database to get
+	better results in the recognition.
+	<p>
+	Automatic learning is stopped by navigation in the database or by changing
+	to the testmode.
+	<p>
+	In testmode (Test tab) you can write characters and words an will see the
+	result in the input box.
+     
+     
+     </p>
+    <hr>
+    <a name="list"><h2>Mailing list</h2></a>
+    </p>	
+    The <a href="https://handhelds.org/mailman/listinfo/rosetta">Rosetta mailing list</a> exists for discussion of Rosetta. It is designated to both, developers and users.
+    Anyone is free to <a href="https://handhelds.org/mailman/listinfo/rosetta">subscribe</a> or <a href="http://handhelds.org/hypermail/rosetta/">browse the archives</a>.
+    </p>
+    <hr>
+    <a name="references"><h2>References</h2></a>
+    <dl><dt><a name="freesw">Free Software</a>
+      </dt><dd><a href="http://www.gnu.org/philosophy/free-sw.html">http://www.gnu.org/philosophy/free-sw.html</a>
+
+      </dd><dt><a name="GPL">GNU General Public License</a>
+      </dt><dd><a href="http://www.gnu.org/licenses/licenses.html#GPL">http://www.gnu.org/licenses/licenses.html#GPL</a>
+
+      </dd><dt><a name="wm-spec">WM Specifications</a>
+      </dt><dd><a href="http://www.freedesktop.org/standards/wm-spec.html">http://www.freedesktop.org/standards/wm-spec.html</a>
+      
+      </dd><dt><a nane="xmerlin">XMerlin</a>
+      </dt><dd><a href="http://www.hellkvist.org/software/">http://www.hellkvist.org/software/</a>
+    </dd></dl>
+
+    <hr>
+
+    <address><a href="mailto:ole.reinhardt@kernelconcepts.de">Ole Reinhardt</a></address>
+   </body></html>

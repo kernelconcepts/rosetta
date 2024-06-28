@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Rosetta
+Comment=Character recognition
+Exec=rosetta
+Type=Application
+Icon=rosetta.png
+Categories=Panel;Utility;MB
+X-MB-INPUT-MECHANISM=True

@@ -1,0 +1,18 @@
+Package: rosetta
+Section: x11
+Priority: optional
+Version: VERSION
+Architecture: arm
+Maintainer: Ole Reinhardt <ole.reinhardt@kernelconcepts.de>
+Depends: libc6, xlibs 
+Suggests: matchbox
+Description: A multi stroke character recognition to use on handheld devices
+ It recognises whole words / sentences as well as single characters. If you 
+ write a single character, the recognition depends on the field, you wrote
+ in. If you write a whole word or more, the recognition assumes lower case
+ characters or numbers.
+ .
+ It is primarily designed for touchscreen devices, and works well with the
+ matchbox window manager.
+Source: rosetta-VERSION.tar.gz
+

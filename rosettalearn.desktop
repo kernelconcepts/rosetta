@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Rosetta Trainer
+Comment=Character recognition training tool
+Exec=rosettalearn
+Type=Application
+Icon=rosetta.png
+Categories=Application;SystemSettings;GPE
+StartupNotify=False
+

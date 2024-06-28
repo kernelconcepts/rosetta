@@ -1,0 +1,20 @@
+Howto install Rosetta
+---------------------
+
+After unpacking the file type:
+make
+make install
+
+
+Hopefully this will install Rosetta in /usr/local/bin and the
+configuration files (config, database and precalculations) in
+characters in /usr/local/share/rosetta. If this does not suite you you
+need to edit the Makefile to fit your needs. 
+
+Cross compiling
+---------------
+
+Cross compilation is no problem. You need to edit the
+Makefile. Edit CFLAGS, LDFLAGS, CC and STRIP to fit your
+system. Rosetta has succesfully been built this way on an i386 using
+arm-linux-gcc.
